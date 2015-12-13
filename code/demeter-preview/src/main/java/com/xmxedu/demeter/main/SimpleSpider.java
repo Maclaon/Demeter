@@ -13,25 +13,33 @@ import java.util.List;
  */
 public class SimpleSpider {
     public static void main(String[] args) {
+
         System.setProperty("webdriver.chrome.driver", "demeter-preview/chromedriver");
         WebDriver driver = new ChromeDriver();
-        driver.get(
-            "http://www.neitui.me/index.php?name=neitui&handle=lists&fr=search&keyword=&kcity=%E6%9D%AD%E5%B7%9E");
 
-        System.out.println("Page title is: " + driver.getTitle());
+        try {
 
-        WebElement jobDetials = driver.findElement(By.xpath("//*[@id=\"joblist\"]/div[4]/ul/li[8]"));
 
-        System.out.println(jobDetials.getText());
+            driver.get(
+                "http://www.neitui.me/index.php?name=neitui&handle=lists&fr=search&keyword=&kcity=%E6%9D%AD%E5%B7%9E");
 
-        List<WebElement> jd = driver.findElements(
-            By.cssSelector("#joblist > div.content.commentjobs.brjobs.topjobs > ul > li"));
+            Thread.sleep(2000);
+            System.out.println("Page title is: " + driver.getTitle());
 
-        for (WebElement we: jd){
-            WebElement jobDetail = we.findElement(By.xpath("//*[@id=\"joblist\"]/div[4]/ul/li[1]/div[2]/div[2]/div[1]/a"));
+            List<WebElement> jd = driver.findElements(By.cssSelector("#joblist > div.content.commentjobs.brjobs.topjobs > ul > li"));
+
+            Thread.sleep(2000);
+            for (WebElement we : jd) {
+                WebElement jobDetail = we.findElement(By.className("jobnote-l"));
+                String url = jobDetail.getAttribute("href");
+                System.out.println(url);
+            }
+
+            //Close the browser
+            driver.quit();
+        }catch (Exception e){
+            e.printStackTrace();
+            driver.quit();
         }
-
-        //Close the browser
-        driver.quit();
     }
 }
