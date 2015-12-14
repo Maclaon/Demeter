@@ -30,7 +30,7 @@ public class SimpleSpider {
 
             Thread.sleep(2000);
             for (WebElement we : jd) {
-                WebElement jobDetail = we.findElement(By.className("jobnote-l"));
+                WebElement jobDetail = we.findElement(By.cssSelector("div.jobnote-l > a"));
                 String url = jobDetail.getAttribute("href");
                 System.out.println(url);
             }
