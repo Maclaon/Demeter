@@ -19,7 +19,6 @@ public class SimpleSpider {
 
         try {
 
-
             driver.get(
                 "http://www.neitui.me/index.php?name=neitui&handle=lists&fr=search&keyword=&kcity=%E6%9D%AD%E5%B7%9E");
 
@@ -34,6 +33,9 @@ public class SimpleSpider {
                 String url = jobDetail.getAttribute("href");
                 System.out.println(url);
             }
+
+
+            
 
             //Close the browser
             driver.quit();
