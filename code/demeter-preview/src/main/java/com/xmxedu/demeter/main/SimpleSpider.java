@@ -35,7 +35,7 @@ public class SimpleSpider {
             }
 
 
-            
+
 
             //Close the browser
             driver.quit();
