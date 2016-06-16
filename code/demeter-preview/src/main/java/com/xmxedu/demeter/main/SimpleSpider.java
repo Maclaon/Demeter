@@ -1,6 +1,11 @@
 package com.xmxedu.demeter.main;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -25,6 +30,15 @@ public class SimpleSpider {
             Thread.sleep(2000);
             System.out.println("Page title is: " + driver.getTitle());
 
+            String content = driver.getPageSource();
+            System.out.println(content);
+
+            Document jsoup = Jsoup.parse(content);
+            Element body = jsoup.body();
+            Elements elements = body.getAllElements();
+            Element first = elements.first();
+            System.out.println(first.data());
+
             List<WebElement> jd = driver.findElements(By.cssSelector("#joblist > div.content.commentjobs.brjobs.topjobs > ul > li"));
 
             Thread.sleep(2000);
@@ -33,9 +47,6 @@ public class SimpleSpider {
                 String url = jobDetail.getAttribute("href");
                 System.out.println(url);
             }
-
-
-
 
             //Close the browser
             driver.quit();
